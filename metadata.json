@@ -1,0 +1,6 @@
+{
+  "name": "HR Pulse - Employee & HR Management System",
+  "description": "Comprehensive HRMS featuring employee directory, attendance tracking, payroll processing, and performance appraisal management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
