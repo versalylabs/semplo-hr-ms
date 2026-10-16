@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { HRProvider, useHR } from './context/HRContext';
 import { LoginPage } from './components/auth/LoginPage';
+
+const PAGE_TITLES: Record<string, string> = {
+  dashboard: 'Overview Dashboard',
+  self_service: 'Employee Self-Service',
+  company_hub: 'Company Hub & Notices',
+  employees: 'Employee Directory',
+  attendance: 'Time & Attendance Terminal',
+  leaves: 'Leave Management & Balances',
+  payroll: 'Payroll & Statutory Deductions',
+  appraisals: 'Performance Reviews & OKRs',
+  recruitment: 'Recruitment & ATS',
+  onboarding: 'Lifecycle & Transitions',
+  departments: 'Department Allocations',
+  org_chart: 'Organizational Hierarchy',
+  audit: 'Audit & Compliance Trail',
+};
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { OverviewDashboard } from './components/dashboard/OverviewDashboard';
@@ -72,7 +88,17 @@ const GlobalOverlays: React.FC = () => {
 };
 
 const AppShell: React.FC = () => {
-  const { isAuthenticated } = useHR();
+  const { isAuthenticated, currentTab, currentUser } = useHR();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      document.title = 'Sign In — Semplo HR & Payroll';
+    } else {
+      const pageTitle = PAGE_TITLES[currentTab] || 'Dashboard';
+      const company = currentUser?.companyName || 'Semplo';
+      document.title = `${pageTitle} — ${company} HR`;
+    }
+  }, [isAuthenticated, currentTab, currentUser]);
 
   if (!isAuthenticated) {
     return <LoginPage />;

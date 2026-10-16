@@ -14,6 +14,7 @@ import {
   LogOut,
   Menu,
   X,
+  Sparkles,
 } from 'lucide-react';
 import { useHR } from '../../context/HRContext';
 
@@ -72,8 +73,8 @@ export const Header: React.FC = () => {
 
   return (
     <header className="h-16 px-3 sm:px-6 lg:px-8 border-b border-slate-200/80 bg-[#ffffff] flex items-center justify-between sticky top-0 z-30 shadow-xs">
-      {/* Left Section: Mobile Menu Button & Breadcrumb */}
-      <div className="flex items-center gap-2 min-w-0">
+      {/* Left Section: Mobile Menu Button, Brand Logo Icon & Breadcrumb */}
+      <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
         <button
           onClick={() => setIsMobileSidebarOpen(true)}
           className="lg:hidden p-2 -ml-1 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors shrink-0"
@@ -82,12 +83,24 @@ export const Header: React.FC = () => {
           <Menu className="w-5 h-5" />
         </button>
 
+        {/* Brand Logo Icon */}
+        <div 
+          onClick={() => setCurrentTab('dashboard')}
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-emerald-600 via-emerald-500 to-teal-400 text-white flex items-center justify-center shadow-xs shadow-emerald-600/30 shrink-0 cursor-pointer hover:scale-105 transition-transform"
+          title="Semplo Dashboard"
+        >
+          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white text-white" />
+        </div>
+
         <div className="flex items-center gap-1.5 sm:gap-2.5 text-[13px] sm:text-[14px] min-w-0">
-          <div className="hidden sm:flex items-center gap-1.5 text-slate-500 font-medium shrink-0">
+          <div 
+            onClick={() => setCurrentTab('dashboard')}
+            className="hidden sm:flex items-center gap-1.5 text-slate-500 font-medium shrink-0 cursor-pointer hover:text-emerald-700 transition-colors"
+          >
             <span className="text-emerald-700 font-bold">Semplo</span>
             <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
           </div>
-          <span className="font-bold text-slate-900 tracking-tight truncate max-w-[130px] xs:max-w-[170px] sm:max-w-[260px] md:max-w-none">
+          <span className="font-bold text-slate-900 tracking-tight truncate max-w-[120px] xs:max-w-[160px] sm:max-w-[260px] md:max-w-none">
             {TAB_TITLES[currentTab] || 'Dashboard'}
           </span>
         </div>
